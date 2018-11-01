@@ -4,6 +4,8 @@
 
 
 using namespace std;
+
+
 Complex::Complex()
 {
 	Real = 0;
@@ -21,8 +23,10 @@ Complex::Complex(Complex &x)
 	Real = x.getReal();
 	Imaginar = x.getImaginar();
 }
-//Supraîncărcarea operatorilor compuși de atribuire:
 
+
+
+//Supraîncărcarea operatorilor compuși de atribuire:
 
 Complex& Complex::operator = (const Complex &x)
 {
@@ -48,6 +52,7 @@ Complex& Complex::operator += (const double x)
 	this->Real = Real + x;
 	return *this;
 }
+
 Complex& Complex::operator -= (const Complex& x)
 {
 	if (this != &x) {
@@ -62,6 +67,7 @@ Complex& Complex::operator -= (const double x)
 	this->Real = Real - x;
 	return *this;
 }
+
 Complex& Complex::operator *= (const Complex& x)
 {
 	if (this != &x) {
@@ -72,12 +78,14 @@ Complex& Complex::operator *= (const Complex& x)
 	return *this;
 
 }
+
 Complex& Complex::operator *= (const double x)
 {
 	Real = Real * x;
 	Imaginar = Imaginar * x;
 	return *this;
 }
+
 Complex& Complex::operator /= (Complex& x)
 {
 	if (this != &x) {
@@ -109,6 +117,7 @@ Complex& Complex::operator /= (const double x)
 }
 
 
+
 //Supraîncărcarea operatorilor aritmetici unari:
 
 Complex operator + (const Complex &x)
@@ -126,8 +135,6 @@ Complex operator - (const Complex x)
 	z.Imaginar = x.getImaginar()*(-1);
 	return z;
 }
-
-
 
 
 
@@ -156,7 +163,6 @@ Complex operator + (const double x, const Complex& y)
 	z.Imaginar = y.getImaginar();
 	return z;
 }
-
 
 Complex operator - (const Complex& x, const Complex& y)
 {
@@ -216,7 +222,7 @@ Complex operator / (const Complex& x, const Complex& y)
 	z = y;
 	if (y.getReal() == 0 && y.getImaginar() == 0)
 	{
-		cout << "Error: Can't be done !! ";
+		cout << "Error: Can't be done !! " << endl;
 		return z;
 	}
 	else
@@ -228,13 +234,14 @@ Complex operator / (const Complex& x, const Complex& y)
 		return z;
 	}
 }
+
 Complex operator / (const Complex& x, const double y)
 {
 	Complex z;
 	z = x;
 	if (y == 0)
 	{
-		cout << "Error: Can't be done !! ";
+		cout << "Error: Can't be done !! " << endl;
 		return z;
 	}
 	else
@@ -251,7 +258,7 @@ Complex operator / (const double x, Complex &y)
 	z = y;
 	if (y.getImaginar() == 0 && y.getReal() == 0)
 	{
-		cout << "Error: Can't be done !! ";
+		cout << "Error: Can't be done !! " << endl;
 		return y;
 	}
 	else
@@ -261,6 +268,7 @@ Complex operator / (const double x, Complex &y)
 		return z;
 	}
 }
+
 Complex operator ^ (Complex& x, int n)
 {
 	int i;
@@ -276,8 +284,6 @@ Complex operator ^ (Complex& x, int n)
 			aux = x * aux;
 	return aux;
 }
-
-
 
 
 
@@ -303,25 +309,27 @@ bool operator == (const double x, const Complex& y)
 		return true;
 	return false;
 }
+
 bool operator != (const Complex& x, const Complex& y)
 {
 	if (x.getReal() != y.getReal() || x.getImaginar() != y.getImaginar())
 		return true;
 	return false;
 }
+
 bool operator != (const Complex& x, const double y)
 {
 	if (x.getReal() != y || x.getImaginar() != 0)
 		return true;
 	return false;
 }
+
 bool operator != (const double x, const Complex& y)
 {
 	if (x != y.getReal() || 0 != y.getImaginar())
 		return true;
 	return false;
 }
-
 
 
 
@@ -333,6 +341,7 @@ void Complex::Add()
 	cin >> Imaginar;
 	cout << endl;
 }
+
 
 void Complex::Display()
 {
@@ -399,7 +408,6 @@ void Complex::Conjugate()
 
 
 }
-
 
 
 

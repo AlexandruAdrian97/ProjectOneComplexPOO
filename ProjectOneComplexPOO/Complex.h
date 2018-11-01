@@ -46,7 +46,6 @@ public:
 
 
 
-
 	//Supraîncărcarea operatorilor aritmetici unari:
 
 	friend Complex operator + (const Complex& x);
