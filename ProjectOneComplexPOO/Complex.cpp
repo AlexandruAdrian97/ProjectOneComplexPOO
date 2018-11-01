@@ -216,7 +216,7 @@ Complex operator / (const Complex& x, const Complex& y)
 	z = y;
 	if (y.getReal() == 0 && y.getImaginar() == 0)
 	{
-		cout << "Eroare: Nu se poate efectua impartirea la 0 ";
+		cout << "Error: Can't be done !! ";
 		return z;
 	}
 	else
@@ -234,7 +234,7 @@ Complex operator / (const Complex& x, const double y)
 	z = x;
 	if (y == 0)
 	{
-		cout << "Eroare: Nu se poate efectua impartirea la 0 ";
+		cout << "Error: Can't be done !! ";
 		return z;
 	}
 	else
@@ -251,7 +251,7 @@ Complex operator / (const double x, Complex &y)
 	z = y;
 	if (y.getImaginar() == 0 && y.getReal() == 0)
 	{
-		cout << "Eroare: Nu se poate efectua impartirea la 0 ";
+		cout << "Error: Can't be done !! ";
 		return y;
 	}
 	else
