@@ -1,7 +1,7 @@
 ﻿#include "pch.h"
 #include "Complex.h"
 #include <iostream>
-
+#include <string>
 
 using namespace std;
 
@@ -23,6 +23,61 @@ Complex::Complex(Complex &x)
 	Real = x.getReal();
 	Imaginar = x.getImaginar();
 }
+
+
+// Nu functioneaza si nu inteleg motivul
+/*
+	Complex::Complex(string s) 
+	{
+
+
+	int i = 0;
+
+	if (s[0] == 'i' || s[1] == 'i')
+
+		Real = 0;
+
+	else
+
+	{
+
+		for (i = 1; i < s.size(); i++)
+
+			if (s[i] == '+' || s[i] == '-')
+
+				break;
+
+		Real = stod(s.substr(0, i));
+
+	}
+
+	if (i == s.size())
+
+		Imaginar = 0;
+
+	else if (s[i] == '-')
+
+		Imaginar = -1;
+
+	else Imaginar = 1;
+
+
+
+	if (s[i] != 'i' && i + 3 < s.size())
+
+		Imaginar *= stod(s.substr(i + 3, s.size()));
+
+	else if (i + 3 < s.size())
+
+		Imaginar = stod(s.substr(i + 2, s.size()));
+
+
+
+}
+
+	*/
+
+
 
 
 
@@ -116,6 +171,55 @@ Complex& Complex::operator /= (const double x)
 
 }
 
+//Nu functioneaza..
+/*
+ string Complex::ToString() {
+
+	string s = "";
+
+	if (this->Real == 0)
+	{
+	if (this->Imaginar == 0)
+		s += "0";
+			else
+	if (this->Imaginar == 1)
+		s += "i";
+			else
+	if (this->Imaginar == -1)
+		s += "-i";
+			else {
+	if (this->Imaginar > 0)
+		s += "i*" + to_string(this->Imaginar);
+			else
+		s += "-i*" + to_string(-(this->Imaginar));
+
+	}
+	}
+	else
+	{
+	if (this->Imaginar == 0)
+		s += to_string(this->Real);
+			else
+	if (this->Imaginar == 1)
+		s += to_string(this->Real) + "+i";
+			else
+	if (this->Imaginar == -1)
+		s += to_string(this->Real) + "-i";
+			else {
+	if (this->Imaginar > 0)
+		s += to_string(this->Real) + "+i*" + to_string(this->Imaginar);
+			else
+		s += to_string(this->Real) + "-i*" + to_string(-(this->Imaginar));
+
+	}
+	}
+
+	return s;
+
+
+}
+
+*/
 
 
 //Supraîncărcarea operatorilor aritmetici unari:
@@ -412,32 +516,28 @@ void Complex::Conjugate()
 
 
 
-///Supraincarcarea operatorilor de citire si afisare: (mai am de lucru, inca nu merg)
-
+///Supraincarcarea operatorilor de citire si afisare:  nu merg deoarece nu mi functioneaza constructorul cu parametru string si functia toString)
 /*
+istream& operator>>(istream& is, Complex& x) 
+{
+	string c;
+	is >> c;
+	Complex ob(c);
+	x = ob;
+
+	return is;
+}
+
+
 ostream& operator<<(ostream& os, const Complex& x){
-  os << "("<< x.getReal() <<"," << x.getImaginar() << ")" << endl;
+	os << x.ToString();
+
   return os;
 }
-istream& operator>>(istream& is, Complex& x){
-  is >> x.getReal() >> x.getImaginar();
-  return is;
-}
+
+
 */
 
-
-
-
-
-
-///Tostring function:  (mai am de lucru, inca nu merg)
-
-/*
-ostream& operator<< (Complex& x) {
-		return cout << x.toString();
-	}
-
-*/
 
 
 

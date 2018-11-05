@@ -1,8 +1,9 @@
-﻿#pragma once
-
+﻿
 #ifndef COMPLEX_H
 #define COMPLEX_H
 #include <math.h>
+#include <iostream>
+#include <string>
 
 class Complex
 {
@@ -15,6 +16,8 @@ public:
 	Complex();
 	Complex(double, double);
 	Complex(Complex&);
+	
+	//Complex(string); // ??????
 
 	void setReal(double Re) { Real = Re; }
 	double getReal()const { return Real; }
@@ -26,7 +29,7 @@ public:
 	void Display();
 	void Conjugate();
 
-
+	//string ToString(); //??????? 
 
 	//Supraîncărcarea operatorilor compuși de atribuire
 
@@ -111,27 +114,19 @@ public:
 	}
 
 
+	
+
+	///Supraincarcarea operatorilor de citire si afisare: ???
+
+	//   friend istream& operator>>(istream& is, Complex& x);
+
+	//   friend ostream& operator<<(ostream& os, const Complex& x);
+
+ 
 
 
 
 
-	///Supraincarcarea operatorilor de citire si afisare:
-
-//    friend ostream& operator<<(ostream& os, const Complex& x);
-
- //   friend istream& operator>>(istream& is, Complex& x);
-
-
-
-
-
- ///Tostring function:
-
-/*
-	string toString() {
-		return "Numar Complex ToString";
-	}
-*/
 
 
 };
