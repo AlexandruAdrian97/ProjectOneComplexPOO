@@ -25,6 +25,7 @@ Complex::Complex(Complex &x)
 }
 
 
+
 // Nu functioneaza si nu inteleg motivul
 /*
 	Complex::Complex(string s) 

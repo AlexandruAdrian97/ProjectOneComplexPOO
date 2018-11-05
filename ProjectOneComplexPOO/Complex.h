@@ -48,7 +48,6 @@ public:
 	Complex& operator /= (const double y);
 
 
-
 	//Supraîncărcarea operatorilor aritmetici unari:
 
 	friend Complex operator + (const Complex& x);
