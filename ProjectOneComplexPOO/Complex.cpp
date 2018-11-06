@@ -6,77 +6,63 @@
 using namespace std;
 
 
-Complex::Complex()
-{
-	Real = 0;
-	Imaginar = 0;
-}
+
 
 Complex::Complex(double Re, double Im)
 {
-	Real = Re;
-	Imaginar = Im;
+	m_real = Re;
+	m_imaginar = Im;
 }
 
-Complex::Complex(Complex &x)
+Complex::Complex(const Complex &x)
 {
-	Real = x.getReal();
-	Imaginar = x.getImaginar();
+	m_real = x.getReal();
+	m_imaginar = x.getImaginar();
 }
 
 
 
 // Nu functioneaza si nu inteleg motivul
 /*
-	Complex::Complex(string s) 
+	Complex::Complex(std::string s) 
 	{
-
 
 	int i = 0;
 
 	if (s[0] == 'i' || s[1] == 'i')
-
-		Real = 0;
-
+		m_real = 0;
 	else
-
 	{
-
 		for (i = 1; i < s.size(); i++)
 
-			if (s[i] == '+' || s[i] == '-')
-
-				break;
-
-		Real = stod(s.substr(0, i));
-
-	}
-
+		if (s[i] == '+' || s[i] == '-')
+	break;
+		m_real = stod(s.substr(0, i));
+}
 	if (i == s.size())
 
-		Imaginar = 0;
+	m_imaginar = 0;
 
-	else if (s[i] == '-')
+		else 
+	if (s[i] == '-')
 
-		Imaginar = -1;
+	m_imaginar = -1;
 
-	else Imaginar = 1;
-
-
+		else 
+	m_imaginar = 1;
 
 	if (s[i] != 'i' && i + 3 < s.size())
 
-		Imaginar *= stod(s.substr(i + 3, s.size()));
+		m_imaginar *= stod(s.substr(i + 3, s.size()));
 
 	else if (i + 3 < s.size())
 
-		Imaginar = stod(s.substr(i + 2, s.size()));
+		m_imaginar = stod(s.substr(i + 2, s.size()));
 
 
 
 }
-
-	*/
+*/
 
 
 
@@ -87,71 +73,63 @@ Complex::Complex(Complex &x)
 Complex& Complex::operator = (const Complex &x)
 {
 	if (this != &x) {
-		this->Real = x.getReal();
-		this->Imaginar = x.getImaginar();
+		this->m_real = x.getReal();
+		this->m_imaginar = x.getImaginar();
 	}
 	return *this;
 }
 
 Complex& Complex::operator += (const Complex& x)
 {
-	if (this != &x) {
-
-		Real += x.getReal();
-		Imaginar += x.getImaginar();
-	}
+	m_real += x.getReal();
+	m_imaginar += x.getImaginar();
+	
 	return *this;
 }
 
 Complex& Complex::operator += (const double x)
 {
-	this->Real = Real + x;
+	this->m_real = m_real + x;
 	return *this;
 }
 
 Complex& Complex::operator -= (const Complex& x)
 {
-	if (this != &x) {
-		Real -= x.getReal();
-		Imaginar -= x.getImaginar();
-	}
+	m_real -= x.getReal();
+	m_imaginar -= x.getImaginar();	
 	return *this;
 }
 
 Complex& Complex::operator -= (const double x)
 {
-	this->Real = Real - x;
+	this->m_real = m_real - x;
 	return *this;
 }
 
 Complex& Complex::operator *= (const Complex& x)
 {
-	if (this != &x) {
-		double s = Real;
-		Real = Real * x.getReal() - Imaginar * x.getImaginar();
-		Imaginar = s * x.getImaginar() + Imaginar * x.getReal();
-	}
+	double s = m_real;
+	m_real = m_real * x.getReal() - m_imaginar * x.getImaginar();
+	m_imaginar = s * x.getImaginar() + m_imaginar * x.getReal();
+	
 	return *this;
 
 }
 
 Complex& Complex::operator *= (const double x)
 {
-	Real = Real * x;
-	Imaginar = Imaginar * x;
+	m_real = m_real * x;
+	m_imaginar = m_imaginar * x;
 	return *this;
 }
 
 Complex& Complex::operator /= (Complex& x)
 {
-	if (this != &x) {
+	double s1 = m_real;
+	double s2 = x.getReal() * x.getReal() + x.getImaginar() * x.getImaginar();
 
-		double s1 = Real;
-		double s2 = x.getReal() * x.getReal() + x.getImaginar() * x.getImaginar();
-
-		Real = (Real * x.getReal() + Imaginar * x.getImaginar()) / s2;
-		Imaginar = (Imaginar * x.getReal() - s1 * x.getImaginar()) / s2;
-	};
+	m_real = (m_real * x.getReal() + m_imaginar * x.getImaginar()) / s2;
+	m_imaginar = (m_imaginar * x.getReal() - s1 * x.getImaginar()) / s2;
 
 	return *this;
 }
@@ -164,8 +142,8 @@ Complex& Complex::operator /= (const double x)
 	}
 	else
 	{
-		Real = Real / x;
-		Imaginar = Imaginar / x;
+		m_real = m_real / x;
+		m_imaginar = m_imaginar / x;
 
 		return *this;
 	}
@@ -174,43 +152,43 @@ Complex& Complex::operator /= (const double x)
 
 //Nu functioneaza..
 /*
- string Complex::ToString() {
+ std::string Complex::ToString() {
 
-	string s = "";
+	std::string s = "";
 
-	if (this->Real == 0)
+	if (x.m_real == 0)
 	{
-	if (this->Imaginar == 0)
+	if (x.m_imaginar == 0)
 		s += "0";
 			else
-	if (this->Imaginar == 1)
+	if (x.m_imaginar == 1)
 		s += "i";
 			else
-	if (this->Imaginar == -1)
+	if (x.m_imaginar == -1)
 		s += "-i";
 			else {
-	if (this->Imaginar > 0)
-		s += "i*" + to_string(this->Imaginar);
+	if (x.m_imaginar > 0)
+		s += "i*" + to_string(x.m_imaginar);
 			else
-		s += "-i*" + to_string(-(this->Imaginar));
+		s += "-i*" + to_string(-x.m_imaginar);
 
 	}
 	}
 	else
 	{
-	if (this->Imaginar == 0)
-		s += to_string(this->Real);
+	if (x.m_imaginar == 0)
+		s += to_string(x.m_real);
 			else
-	if (this->Imaginar == 1)
-		s += to_string(this->Real) + "+i";
+	if (x.m_imaginar == 1)
+		s += to_string(x.m_real) + "+i";
 			else
-	if (this->Imaginar == -1)
-		s += to_string(this->Real) + "-i";
+	if (x.m_imaginar == -1)
+		s += to_string(x.m_real) + "-i";
 			else {
-	if (this->Imaginar > 0)
-		s += to_string(this->Real) + "+i*" + to_string(this->Imaginar);
+	if (x.m_imaginar > 0)
+		s += to_string(x.m_real) + "+i*" + to_string(x.m_imaginar);
 			else
-		s += to_string(this->Real) + "-i*" + to_string(-(this->Imaginar));
+		s += to_string(x.m_real) + "-i*" + to_string(-(x.m_imaginar));
 
 	}
 	}
@@ -220,24 +198,24 @@ Complex& Complex::operator /= (const double x)
 
 }
 
-*/
 
+ */
 
 //Supraîncărcarea operatorilor aritmetici unari:
 
 Complex operator + (const Complex &x)
 {
 	Complex z;
-	z.Real = x.getReal();
-	z.Imaginar = x.getImaginar();
+	z.m_real = x.getReal();
+	z.m_imaginar = x.getImaginar();
 	return z;
 }
 
 Complex operator - (const Complex x)
 {
 	Complex z;
-	z.Real = x.getReal() *(-1);
-	z.Imaginar = x.getImaginar()*(-1);
+	z.m_real = x.getReal() *(-1);
+	z.m_imaginar = x.getImaginar()*(-1);
 	return z;
 }
 
@@ -248,48 +226,48 @@ Complex operator - (const Complex x)
 Complex operator + (const Complex& x, const Complex& y)
 {
 	Complex z;
-	z.Real = x.getReal() + y.getReal();
-	z.Imaginar = x.getImaginar() + y.getImaginar();
+	z.m_real = x.getReal() + y.getReal();
+	z.m_imaginar = x.getImaginar() + y.getImaginar();
 	return z;
 }
 
 Complex operator + (const Complex& x, const double y)
 {
 	Complex z;
-	z.Real = x.getReal() + y;
-	z.Imaginar = x.getImaginar();
+	z.m_real = x.getReal() + y;
+	z.m_imaginar = x.getImaginar();
 	return z;
 }
 
 Complex operator + (const double x, const Complex& y)
 {
 	Complex z;
-	z.Real = x + y.getReal();
-	z.Imaginar = y.getImaginar();
+	z.m_real = x + y.getReal();
+	z.m_imaginar = y.getImaginar();
 	return z;
 }
 
 Complex operator - (const Complex& x, const Complex& y)
 {
 	Complex z;
-	z.Real = x.getReal() - y.getReal();
-	z.Imaginar = x.getImaginar() - y.getImaginar();
+	z.m_real = x.getReal() - y.getReal();
+	z.m_imaginar = x.getImaginar() - y.getImaginar();
 	return z;
 }
 
 Complex operator - (const Complex& x, const double y)
 {
 	Complex z;
-	z.Real = x.getReal() - y;
-	z.Imaginar = x.getImaginar();
+	z.m_real = x.getReal() - y;
+	z.m_imaginar = x.getImaginar();
 	return z;
 }
 
 Complex operator - (const double x, const Complex& y)
 {
 	Complex z;
-	z.Real = x - y.getReal();
-	z.Imaginar = y.getImaginar();
+	z.m_real = x - y.getReal();
+	z.m_imaginar = y.getImaginar();
 	return z;
 }
 
@@ -300,24 +278,24 @@ Complex operator * (const Complex& x, const Complex& y)
 	double b1_b2 = y.getImaginar() * x.getImaginar();
 	double a1_b2 = y.getReal() * x.getImaginar();
 	double b1_a2 = y.getImaginar() * x.getReal();
-	z.Real = a1_a2 - b1_b2;
-	z.Imaginar = b1_a2 + a1_b2;
+	z.m_real = a1_a2 - b1_b2;
+	z.m_imaginar = b1_a2 + a1_b2;
 	return z;
 }
 
 Complex operator * (const Complex& x, const double y)
 {
 	Complex z;
-	z.Real = x.getReal() * y;
-	z.Imaginar = x.getImaginar() * y;
+	z.m_real = x.getReal() * y;
+	z.m_imaginar = x.getImaginar() * y;
 	return z;
 }
 
 Complex operator * (const double x, const Complex& y)
 {
 	Complex z;
-	z.Real = y.getReal() * x;
-	z.Imaginar = y.getImaginar() * x;
+	z.m_real = y.getReal() * x;
+	z.m_imaginar = y.getImaginar() * x;
 	return z;
 }
 
@@ -334,8 +312,8 @@ Complex operator / (const Complex& x, const Complex& y)
 	{
 		double re = (x.getReal() * y.getReal() + x.getImaginar() * y.getImaginar()) / (y.getReal() * y.getReal() + y.getImaginar() * y.getImaginar());
 		double im = (x.getImaginar() * y.getReal() - x.getReal() * y.getImaginar()) / (y.getReal() * y.getReal() + y.getImaginar() * y.getImaginar());
-		z.Real = re;
-		z.Imaginar = im;
+		z.m_real = re;
+		z.m_imaginar = im;
 		return z;
 	}
 }
@@ -351,8 +329,8 @@ Complex operator / (const Complex& x, const double y)
 	}
 	else
 	{
-		z.Real = x.getReal() / y;
-		z.Imaginar = x.getImaginar() / y;
+		z.m_real = x.getReal() / y;
+		z.m_imaginar = x.getImaginar() / y;
 		return z;
 	}
 }
@@ -368,8 +346,8 @@ Complex operator / (const double x, Complex &y)
 	}
 	else
 	{
-		z.Real = (x*y.getReal()) / (y.getReal() * y.getReal() + y.getImaginar() * y.getImaginar());
-		z.Imaginar = (-x * y.getImaginar()) / (y.getReal() * y.getReal() + y.getImaginar() * y.getImaginar());
+		z.m_real = (x*y.getReal()) / (y.getReal() * y.getReal() + y.getImaginar() * y.getImaginar());
+		z.m_imaginar = (-x * y.getImaginar()) / (y.getReal() * y.getReal() + y.getImaginar() * y.getImaginar());
 		return z;
 	}
 }
@@ -381,8 +359,8 @@ Complex operator ^ (Complex& x, int n)
 	aux = x;
 	if (n == 0)
 	{
-		aux.Real = 1;
-		aux.Imaginar = 0;
+		aux.m_real = 1;
+		aux.m_imaginar = 0;
 	}
 	else
 		for (i = 1; i < n; i++)
@@ -441,76 +419,76 @@ bool operator != (const double x, const Complex& y)
 void Complex::Add()
 {
 	cout << "Real: ";
-	cin >> Real;
+	cin >> m_real;
 	cout << "Imaginar: ";
-	cin >> Imaginar;
+	cin >> m_imaginar;
 	cout << endl;
 }
 
 
 void Complex::Display()
 {
-	if (Real == 0)
+	if (m_real == 0)
 	{
-		if (Imaginar == 0)
+		if (m_imaginar == 0)
 			cout << "0";
 		else
-			if (Imaginar == 1)
+			if (m_imaginar == 1)
 				cout << "i";
 			else
-				if (Imaginar == -1)
+				if (m_imaginar == -1)
 					cout << "-i";
 				else {
-					if (Imaginar > 0)
-						cout << Imaginar << "*i";
+					if (m_imaginar > 0)
+						cout << m_imaginar << "*i";
 					else
-						cout << Imaginar << "*i";
+						cout << m_imaginar << "*i";
 				}
 	}
 	else
-		if (Real > 0)
+		if (m_real > 0)
 		{
-			if (Imaginar == 0)
-				cout << Real;
+			if (m_imaginar == 0)
+				cout << m_real;
 			else
-				if (Imaginar == 1)
-					cout << Real << "+i";
+				if (m_imaginar == 1)
+					cout << m_real << "+i";
 				else
-					if (Imaginar == -1)
-						cout << Real << "-i";
+					if (m_imaginar == -1)
+						cout << m_real << "-i";
 					else {
-						if (Imaginar > 0)
-							cout << Real << "+" << Imaginar << "*i";
+						if (m_imaginar > 0)
+							cout << m_real << "+" << m_imaginar << "*i";
 						else
-							cout << Real << Imaginar << "*i";
+							cout << m_real << m_imaginar << "*i";
 					}
 		}
 		else
-			if (Real < 0)
+			if (m_real < 0)
 			{
-				if (Imaginar == 0)
-					cout << Real;
+				if (m_imaginar == 0)
+					cout << m_real;
 				else
-					if (Imaginar == 1)
-						cout << Real << "+i";
+					if (m_imaginar == 1)
+						cout << m_real << "+i";
 					else
-						if (Imaginar == -1)
-							cout << Real << "-i";
+						if (m_imaginar == -1)
+							cout << m_real << "-i";
 						else {
-							if (Imaginar > 0)
-								cout << Real << "+" << Imaginar << "*i";
+							if (m_imaginar > 0)
+								cout << m_real << "+" << m_imaginar << "*i";
 							else
-								cout << Real << Imaginar << "*i";
+								cout << m_real << m_imaginar << "*i";
 						}
 			}
 }
 
-
-void Complex::Conjugate()
+Complex Complex::Conjugate()
 {
-	Real = Real;
-	Imaginar = -1 * getImaginar();
-
+	 Complex z;
+	z.m_real = m_real;
+	z.m_imaginar = -1 * getImaginar();
+	return z;
 
 }
 

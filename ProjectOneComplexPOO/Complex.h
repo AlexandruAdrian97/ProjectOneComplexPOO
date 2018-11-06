@@ -9,27 +9,26 @@ class Complex
 {
 private:
 
-	double Real, Imaginar;
+	double m_real, m_imaginar;
 
 public:
 
-	Complex();
-	Complex(double, double);
-	Complex(Complex&);
 	
-	//Complex(string); // ??????
+	Complex(double r=0, double i=0);
+	Complex(const Complex&);
+	
+	Complex(std::string); 
 
-	void setReal(double Re) { Real = Re; }
-	double getReal()const { return Real; }
+	void setReal(double Re) { m_real = Re; }
+	double getReal()const { return m_real; }
 
-	void setImaginar(double Im) { Imaginar = Im; }
-	double getImaginar()const { return Imaginar; }
+	void setImaginar(double Im) { m_imaginar = Im; }
+	double getImaginar()const { return m_imaginar; }
 
 	void Add();
 	void Display();
-	void Conjugate();
+	Complex Conjugate();
 
-	//string ToString(); //??????? 
 
 	//Supraîncărcarea operatorilor compuși de atribuire
 
@@ -107,17 +106,17 @@ public:
 			Im = (-1) * sqrt((-x.getReal() + modul(x)) / 2);
 		else
 			Im = sqrt((-x.getReal() + modul(x)) / 2);
-		z.Real = Re;
-		z.Imaginar = Im;
+		z.m_real = Re;
+		z.m_imaginar = Im;
 		return z;
 	}
 
 
 	
 
-	///Supraincarcarea operatorilor de citire si afisare: ???
+	//Supraincarcarea operatorilor de citire si afisare: ???
 
-	//   friend istream& operator>>(istream& is, Complex& x);
+//	   friend istream& operator>>(istream& is, Complex& x);
 
 	//   friend ostream& operator<<(ostream& os, const Complex& x);
 
